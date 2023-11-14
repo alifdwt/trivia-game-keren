@@ -32,7 +32,7 @@
         >
     </li>
     <li class="nav-item {{ Request::path() == 'user' ? 'active' : '' }}">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ url('user') }}">
             <i class="fa-solid fa-users"></i>
             <span>User</span></a
         >

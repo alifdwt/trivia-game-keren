@@ -1,66 +1,204 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## API EndPoints
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Avatar
 
-## About Laravel
+#### Get Avatars
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   URL: `/api/avatar`
+-   Method: GET
+-   Description: Get all avatars
+-   Require token: `No`
+-   Response
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950113/Trivia/Avatar/2023-11-14_082152_tampandanberani.jpg",
+            "price": 50000,
+            "created_at": "2023-11-14T08:21:54.000000Z",
+            "updated_at": "2023-11-14T08:21:54.000000Z"
+        },
+        {
+            "id": 2,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950357/Trivia/Avatar/2023-11-14_082555_2090263599_bd7f79ae17_o.jpg",
+            "price": 75000,
+            "created_at": "2023-11-14T08:25:58.000000Z",
+            "updated_at": "2023-11-14T08:25:58.000000Z"
+        },
+        {
+            "id": 3,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699954205/Trivia/Avatar/2023-11-14_093003_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg",
+            "price": 80000,
+            "created_at": "2023-11-14T09:30:06.000000Z",
+            "updated_at": "2023-11-14T09:30:06.000000Z"
+        }
+    ]
+}
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Get Avatar by ID
 
-## Learning Laravel
+-   URL: `/api/avatar/:avatarId`
+-   Method: GET
+-   Description: Get avatar by ID
+-   Require token: `No`
+-   Response
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+{
+    "code": 200,
+    "data": {
+        "id": 1,
+        "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950113/Trivia/Avatar/2023-11-14_082152_tampandanberani.jpg",
+        "price": 50000,
+        "created_at": "2023-11-14T08:21:54.000000Z",
+        "updated_at": "2023-11-14T08:21:54.000000Z"
+    }
+}
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### User
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### Get Users
 
-## Laravel Sponsors
+-   URL: `/api/user`
+-   Method: GET
+-   Description: Get all users
+-   Require token: `No`
+-   Response
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "avatar_id": 1,
+            "email": "asepsurasep@gmail.com",
+            "username": "asepsurasep",
+            "diamonds": 10,
+            "total_points": 20,
+            "created_at": "2023-11-14T08:28:35.000000Z",
+            "updated_at": "2023-11-14T08:28:35.000000Z"
+        },
+        {
+            "id": 2,
+            "avatar_id": 2,
+            "email": "onosurono@gmail.com",
+            "username": "onosurono",
+            "diamonds": 15,
+            "total_points": 30,
+            "created_at": "2023-11-14T08:29:17.000000Z",
+            "updated_at": "2023-11-14T08:29:17.000000Z"
+        },
+        {
+            "id": 3,
+            "avatar_id": 1,
+            "email": "icejuice@gmail.com",
+            "username": "icejuice",
+            "diamonds": 10,
+            "total_points": 30,
+            "created_at": "2023-11-14T08:29:37.000000Z",
+            "updated_at": "2023-11-14T08:29:37.000000Z"
+        }
+    ]
+}
+```
 
-### Premium Partners
+#### Get User by ID
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   URL: `/api/user/:userId`
+-   Method: GET
+-   Description: Get user by ID
+-   Require token: `No`
+-   Response
 
-## Contributing
+```
+{
+    "code": 200,
+    "data": {
+        "id": 1,
+        "avatar_id": 1,
+        "email": "asepsurasep@gmail.com",
+        "username": "asepsurasep",
+        "diamonds": 10,
+        "total_points": 20,
+        "created_at": "2023-11-14T08:28:35.000000Z",
+        "updated_at": "2023-11-14T08:28:35.000000Z"
+    }
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Question
 
-## Code of Conduct
+#### Get Questions
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   URL: `/api/question`
+-   Method: GET
+-   Description: Get all questions
+-   Require token: `No`
+-   Response
 
-## Security Vulnerabilities
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "question": "Apa ibukota Thailand?",
+            "answer": "Bangkok",
+            "wrong_answer_1": "Hanoi",
+            "wrong_answer_2": "Jakarta",
+            "wrong_answer_3": "Ho Chi Minh City",
+            "created_at": "2023-11-14T07:40:19.000000Z",
+            "updated_at": "2023-11-14T07:40:19.000000Z"
+        },
+        {
+            "id": 2,
+            "question": "Apa warna Laut Merah?",
+            "answer": "Biru",
+            "wrong_answer_1": "Merah",
+            "wrong_answer_2": "Hijau",
+            "wrong_answer_3": "Kuning",
+            "created_at": "2023-11-14T07:42:09.000000Z",
+            "updated_at": "2023-11-14T07:42:09.000000Z"
+        },
+        {
+            "id": 3,
+            "question": "Apa ibu kota Prancis?",
+            "answer": "Paris",
+            "wrong_answer_1": "Madrid",
+            "wrong_answer_2": "Roma",
+            "wrong_answer_3": "Berlin",
+            "created_at": "2023-11-14T07:50:13.000000Z",
+            "updated_at": "2023-11-14T07:50:13.000000Z"
+        }
+    ]
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Get Question by ID
 
-## License
+-   URL: `/api/question/:questionId`
+-   Method: GET
+-   Description: Get question by ID
+-   Require token: `No`
+-   Response
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+{
+    "code": 200,
+    "data": {
+        "id": 1,
+        "question": "Apa ibukota Thailand?",
+        "answer": "Bangkok",
+        "wrong_answer_1": "Hanoi",
+        "wrong_answer_2": "Jakarta",
+        "wrong_answer_3": "Ho Chi Minh City",
+        "created_at": "2023-11-14T07:40:19.000000Z",
+        "updated_at": "2023-11-14T07:40:19.000000Z"
+    }
+}
+```

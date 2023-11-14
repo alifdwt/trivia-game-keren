@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
-@section('title', 'Question')
+@section('title', 'User')
 @section('content')
 <div>
-    <h1 class="h3 mb-2 text-gray-800">Questions and Answers</h1>
+    <h1 class="h3 mb-2 text-gray-800">Users</h1>
     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables, please visit the <a target="_blank"
             href="https://datatables.net">official DataTables documentation</a>.</p>
@@ -13,7 +13,7 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Question and Answer</h6>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Create Question
+                Create User
             </button>
         </div>
         <div class="card-body">
@@ -22,23 +22,27 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Question</th>
-                            <th>Answer</th>
-                            <th>Wrong Answer 1</th>
-                            <th>Wrong Answer 2</th>
-                            <th>Wrong Answer 3</th>
+                            <th>Avatar</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Diamonds</th>
+                            <th>Total Points</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($questions as $question)
+                        @foreach ($users as $user)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $question->question }}</td>
-                                <td>{{ $question->answer }}</td>
-                                <td>{{ $question->wrong_answer_1 }}</td>
-                                <td>{{ $question->wrong_answer_2 }}</td>
-                                <td>{{ $question->wrong_answer_3 }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="{{ url($user->avatar()->get()[0]->image_src) }}" alt="avatar" width="100px">
+                                    </div>
+                                </td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->diamonds }}</td>
+                                <td>{{ $user->total_points }}</td>
                                 <td>
                                     <button class="btn btn-primary">Edit</button>
                                     <button class="btn btn-danger">Delete</button>
@@ -62,28 +66,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="">
-                    <div class="form-group">
-                        <label for="question" class="text-primary">Question</label>
-                        <input type="text" class="form-control" id="question">
-                    </div>
-                    <div class="form-group">
-                        <label for="answer" class="text-success">Answer</label>
-                        <input type="text" class="form-control" id="answer">
-                    </div>
-                    <div class="form-group">
-                        <label for="wrong_answer_1" class="text-danger">Wrong Answer 1</label>
-                        <input type="text" class="form-control" id="wrong_answer_1">
-                    </div>
-                    <div class="form-group">
-                        <label for="wrong_answer_2" class="text-danger">Wrong Answer 2</label>
-                        <input type="text" class="form-control" id="wrong_answer_2">
-                    </div>
-                    <div class="form-group">
-                        <label for="wrong_answer_3" class="text-danger">Wrong Answer 3</label>
-                        <input type="text" class="form-control" id="wrong_answer_3">
-                    </div>
-                </form>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

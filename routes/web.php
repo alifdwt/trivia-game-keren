@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Routing\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/admin', function () {
-    return view('pages.home');
+Route::get("/", function () {
+    return view("welcome");
 });
 
-Route::resource('/user', \App\Http\Controllers\UserViewController::class);
-Route::resource('/avatar', \App\Http\Controllers\AvatarViewController::class);
-Route::resource('/question', \App\Http\Controllers\QuestionViewController::class);
+Route::middleware("auth")->group(function () {
+    Route::get("/admin", function () {
+        return view("pages.home");
+    });
+    Route::resource("/user", \App\Http\Controllers\UserViewController::class);
+    Route::resource(
+        "/avatar",
+        \App\Http\Controllers\AvatarViewController::class
+    );
+    Route::resource(
+        "/question",
+        \App\Http\Controllers\QuestionViewController::class
+    );
+});
+
+require __DIR__ . "/auth.php";

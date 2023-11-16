@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Avatar extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'image_src',
-        'price'
-    ];
+    protected $fillable = ["image_src", "price"];
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(TriviaUser::class);
     }
 }

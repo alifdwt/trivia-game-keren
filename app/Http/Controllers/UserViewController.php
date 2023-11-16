@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\TriviaUser;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +11,7 @@ class UserViewController extends Controller
 {
     public function index(): View
     {
-        $users = User::orderBy("id")->get();
+        $users = TriviaUser::orderBy("id")->get();
         return view("pages.user", compact("users"));
     }
 
@@ -25,7 +25,7 @@ class UserViewController extends Controller
             "total_points" => "required|numeric",
         ]);
 
-        User::create($request->all());
+        TriviaUser::create($request->all());
 
         return redirect()
             ->back()
@@ -34,13 +34,13 @@ class UserViewController extends Controller
 
     public function show($id): View
     {
-        $user = User::findOrFail($id);
+        $user = TriviaUser::findOrFail($id);
         return view("pages.user", compact("user"));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $user = User::findOrFail($id);
+        $user = TriviaUser::findOrFail($id);
         $this->validate($request, [
             "avatar_id" => "required|numeric",
             "email" => "required|string|max:255",
@@ -58,7 +58,7 @@ class UserViewController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $user = User::findOrFail($id);
+        $user = TriviaUser::findOrFail($id);
         $user->delete();
 
         return redirect()

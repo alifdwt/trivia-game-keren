@@ -228,17 +228,40 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h2>Are you sure want to delete this question?</h2>
+                            <h4>Are you sure want to delete this question?</h4>
+                            <h5>{{ $destroyQuestion->question }}</h5>
+                            @php
+                                $answers = [$destroyQuestion->answer, $destroyQuestion->wrong_answer_1, $destroyQuestion->wrong_answer_2, $destroyQuestion->wrong_answer_3];
+                                shuffle($answers); // Mengacak urutan jawaban
+                            @endphp
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            class="{{ $answers[0] === $destroyQuestion->answer ? 'text-success' : 'text-danger' }}">
+                                            a. {{ $answers[0] }}</td>
+                                        <td
+                                            class="{{ $answers[1] === $destroyQuestion->answer ? 'text-success' : 'text-danger' }}">
+                                            b. {{ $answers[1] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="{{ $answers[2] === $destroyQuestion->answer ? 'text-success' : 'text-danger' }}">
+                                            c. {{ $answers[2] }}</td>
+                                        <td
+                                            class="{{ $answers[3] === $destroyQuestion->answer ? 'text-success' : 'text-danger' }}">
+                                            d. {{ $answers[3] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        </div>
     @endforeach
-    </div>
 @stop

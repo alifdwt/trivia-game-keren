@@ -16,11 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", function () {
     return view("welcome");
 });
+// Route::get("/verify-email-test", function () {
+//     return view("pages.auth.verify-email");
+// });
+Route::get("/admin", function () {
+    return view("pages.home");
+})
+    ->middleware(["auth", "verified"])
+    ->name("admin");
 
 Route::middleware("auth")->group(function () {
-    Route::get("/admin", function () {
-        return view("pages.home");
-    });
     Route::resource("/user", \App\Http\Controllers\UserViewController::class);
     Route::resource(
         "/avatar",

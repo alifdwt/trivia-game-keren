@@ -23,10 +23,12 @@
                             <tr>
                                 <th>No</th>
                                 <th>Avatar</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Username</th>
                                 <th>Diamonds</th>
                                 <th>Total Points</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,10 +42,18 @@
                                                 width="100px">
                                         </div>
                                     </td>
+                                    <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->diamonds }}</td>
                                     <td>{{ $user->total_points }}</td>
+                                    <td>
+                                        @if ($user->email_verified_at)
+                                            <span class="badge badge-success">Admin</span>
+                                        @else
+                                            <span class="badge badge-primary">Member</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal"
                                             data-target="#userEdit{{ $user->id }}">Edit</button>
@@ -66,49 +76,50 @@
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Create User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                    name="username" value="{{ old('username') }}" id="username" placeholder="Username">
-                                @error('username')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            {{-- @csrf --}}
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        placeholder="Full Name" name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="exampleUserName"
+                                        placeholder="User Name" name="username" value="{{ old('username') }}">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" id="email" placeholder="Email">
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    placeholder="Email Address" name="email" value="{{ old('email') }}">
                                 @error('email')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="diamonds">Diamonds</label>
-                                    <input type="number" class="form-control @error('diamonds') is-invalid @enderror"
-                                        name="diamonds" value="{{ old('diamonds') }}" id="diamonds"
-                                        placeholder="Diamonds">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="number" class="form-control form-control-user" id="diamonds"
+                                        placeholder="Diamods" name="diamonds">
                                     @error('diamonds')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="col">
-                                    <label for="total_points">Total Points</label>
-                                    <input type="number" class="form-control @error('total_points') is-invalid @enderror"
-                                        name="total_points" value="{{ old('total_points') }}" id="total_points"
-                                        placeholder="Total Points">
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control form-control-user" id="total_ponts"
+                                        placeholder="Total Points" name="total_points">
                                     @error('total_points')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -116,11 +127,38 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="avatar_id">Avatar ID</label>
-                                <input type="number" class="form-control @error('avatar_id') is-invalid @enderror"
-                                    name="avatar_id" value="{{ old('avatar') }}" id="avatar_id" placeholder="Avatar ID">
-                                @error('avatar')
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                                        placeholder="Password" name="password">
+                                    @error('password')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
+                                        placeholder="Repeat Password" name="password_confirmation">
+                                    @error('password_confirmation')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around mb-4 flex-wrap">
+                                @foreach ($avatars as $avatar)
+                                    <div>
+                                        <input type="radio" id="avatar-{{ $avatar->id }}" name="avatar_id"
+                                            value="{{ $avatar->id }}" />
+                                        <label for="avatar-{{ $avatar->id }}">
+                                            <img src="{{ $avatar->image_src }}" alt="avatar" width="75px"
+                                                height="75px" class="rounded-circle">
+                                        </label>
+                                    </div>
+                                @endforeach
+                                @error('avatar_id')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -153,46 +191,45 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        name="username" value="{{ $editUser->username }}" id="username"
-                                        placeholder="Username">
-                                    @error('username')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user"
+                                            id="exampleFirstName" placeholder="Full Name" name="name"
+                                            value="{{ $editUser->name }}">
+                                        @error('name')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="exampleUserName"
+                                            placeholder="User Name" name="username" value="{{ $editUser->username }}">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ $editUser->email }}" id="email"
-                                        placeholder="Email">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Email Address" name="email" value="{{ $editUser->email }}">
                                     @error('email')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="diamonds">Diamonds</label>
-                                        <input type="number" class="form-control @error('diamonds') is-invalid @enderror"
-                                            name="diamonds" value="{{ $editUser->diamonds }}" id="diamonds"
-                                            placeholder="Diamonds">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" id="diamonds"
+                                            placeholder="Diamods" name="diamonds" value="{{ $editUser->diamonds }}">
                                         @error('diamonds')
                                             <div class="alert alert-danger mt-2">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="col">
-                                        <label for="total_points">Total Points</label>
-                                        <input type="number"
-                                            class="form-control @error('total_points') is-invalid @enderror"
-                                            name="total_points" value="{{ $editUser->total_points }}" id="total_points"
-                                            placeholder="Total Points">
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control form-control-user" id="total_ponts"
+                                            placeholder="Total Points" name="total_points"
+                                            value="{{ $editUser->total_points }}">
                                         @error('total_points')
                                             <div class="alert alert-danger mt-2">
                                                 {{ $message }}
@@ -200,12 +237,39 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="avatar_id">Avatar ID</label>
-                                    <input type="number" class="form-control @error('avatar_id') is-invalid @enderror"
-                                        name="avatar_id" value="{{ $editUser->avatar_id }}" id="avatar_id"
-                                        placeholder="Avatar ID">
-                                    @error('avatar')
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password" name="password">
+                                        @error('password')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repeat Password"
+                                            name="password_confirmation">
+                                        @error('password_confirmation')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-around mb-4 flex-wrap">
+                                    @foreach ($avatars as $avatar)
+                                        <div>
+                                            <input type="radio" id="avatar-{{ $avatar->id }}" name="avatar_id"
+                                                value="{{ $avatar->id }}" />
+                                            <label for="avatar-{{ $avatar->id }}">
+                                                <img src="{{ $avatar->image_src }}" alt="avatar" width="75px"
+                                                    height="75px" class="rounded-circle">
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    @error('avatar_id')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>

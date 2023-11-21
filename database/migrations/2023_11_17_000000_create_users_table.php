@@ -10,13 +10,17 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("trivia_users", function (Blueprint $table) {
+        Schema::create("users", function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("avatar_id");
-            $table->string("email");
-            $table->string("username");
+            $table->string("name");
+            $table->string("email")->unique();
+            $table->string("username")->unique();
             $table->integer("diamonds")->default(0);
             $table->bigInteger("total_points")->default(0);
+            $table->timestamp("email_verified_at")->nullable();
+            $table->string("password")->nullable();
+            $table->rememberToken();
             $table->timestamps();
 
             $table
@@ -32,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("trivia_users");
+        Schema::dropIfExists("users");
     }
 };

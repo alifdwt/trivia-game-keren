@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,7 +17,17 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $fillable = ["name", "email", "password"];
+    protected $fillable = [
+        "name",
+        "email",
+        "username",
+        "diamonds",
+        "total_points",
+        "avatar_id",
+        "password",
+        "email_verified_at",
+        "remember_token",
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -35,4 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
         "email_verified_at" => "datetime",
         "password" => "hashed",
     ];
+
+    public function avatar()
+    {
+        return $this->belongsTo(Avatar::class);
+    }
 }

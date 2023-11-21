@@ -9,7 +9,7 @@ class TriviaUser extends Model
 {
     use HasFactory;
     protected $fillable = [
-        // 'name',
+        "name",
         "avatar_id",
         "email",
         "username",

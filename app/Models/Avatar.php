@@ -11,6 +11,6 @@ class Avatar extends Model
     protected $fillable = ["image_src", "price"];
     public function users()
     {
-        return $this->hasMany(TriviaUser::class);
+        return $this->hasMany(User::class);
     }
 }

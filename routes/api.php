@@ -6,26 +6,32 @@ use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\AvatarController;
 use App\Http\Controllers\api\QuestionController;
 use App\Http\Controllers\api\AnswerController;
+use App\Http\Controllers\api\TriviaUserController;
 
-Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
+Route::middleware("auth:sanctum")->get("/users", function (Request $request) {
     return $request->user();
 });
 
 // AVATARS
-Route::apiResource('avatar', AvatarController::class);
+Route::apiResource("avatar", AvatarController::class);
 // Route::get('/avatars', [AvatarController::class, 'findAll']);
 // Route::get('/avatar/{id}', [AvatarController::class, 'getAvatarById']);
 // Route::post('/avatar', [AvatarController::class, 'store']);
 
-
 // USERS
-Route::apiResource('user', UserController::class);
+Route::apiResource("user", UserController::class);
 // Route::get('/users', [UserController::class, 'findAll']);
 // Route::get('/user/{id}', [UserController::class, 'getUserById']);
 // Route::post('/user', [UserController::class, 'store']);
 
 // QUESTIONS
-Route::apiResource('question', QuestionController::class);
+Route::apiResource("question", QuestionController::class);
 
 // ANSWERS
-Route::apiResource('answer', AnswerController::class);
+Route::apiResource("answer", AnswerController::class);
+
+// TRIVIA USERS
+// Route::apiResource(
+//     "trivia-user",
+//     \App\Http\Controllers\api\TriviaUserController::class
+// );

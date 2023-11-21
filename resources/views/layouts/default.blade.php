@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('includes.head')
+    {{-- @notifyCss --}}
 </head>
+
 <body id="page-top">
+    {{-- <x-notify::notify />
+    @notifyJs --}}
     <div id="wrapper">
         @include('includes.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
@@ -20,4 +25,5 @@
     @include('includes.logoutmodal')
     @include('includes.scripts')
 </body>
+
 </html>

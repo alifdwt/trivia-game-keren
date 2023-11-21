@@ -12,7 +12,7 @@
                 <form class="user" method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="form-group row">
-                        <div class="col-sm-12 mb-3 mb-sm-0">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                 placeholder="Full Name" name="name" value="{{ old('name') }}">
                             @error('name')
@@ -21,11 +21,10 @@
                                 </div>
                             @enderror
                         </div>
-                        {{-- <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user"
-                            id="exampleLastName" placeholder="Last Name" name="last_name"
-                            value="{{ old('last_name') }}">
-                    </div> --}}
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-user" id="exampleUserName"
+                                placeholder="User Name" name="username" value="{{ old('username') }}">
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
@@ -55,6 +54,34 @@
                                 </div>
                             @enderror
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-around mb-4 flex-wrap">
+                        @foreach ($avatars as $avatar)
+                            <div>
+                                <input type="radio" id="avatar-{{ $avatar->id }}" name="avatar_id"
+                                    value="{{ $avatar->id }}" />
+                                <label for="avatar-{{ $avatar->id }}">
+                                    <img src="{{ $avatar->image_src }}" alt="avatar" width="75px" height="75px"
+                                        class="rounded-circle">
+                                </label>
+                            </div>
+                        @endforeach
+                        @error('avatar_id')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="admin-code">Admin Code</label>
+                        <input type="text" class="form-control form-control-user" id="admin-code"
+                            placeholder="Admin Code" name="admin_code" value="{{ old('admin_code') }}">
+                        @error('admin_code')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                     Register Account

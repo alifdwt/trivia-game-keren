@@ -55,18 +55,37 @@
                             @enderror
                         </div>
                     </div>
+                    <h5>Avatars</h5>
                     <div class="d-flex justify-content-around mb-4 flex-wrap">
                         @foreach ($avatars as $avatar)
                             <div>
-                                <input type="radio" id="avatar-{{ $avatar->id }}" name="avatar_id"
-                                    value="{{ $avatar->id }}" />
+                                <input type="checkbox" id="avatar-{{ $avatar->id }}" name="avatar_choices[]"
+                                    value="{{ $avatar->id }}" onclick="showSelectedAvatars(this.id)" />
                                 <label for="avatar-{{ $avatar->id }}">
                                     <img src="{{ $avatar->image_src }}" alt="avatar" width="75px" height="75px"
                                         class="rounded-circle">
                                 </label>
                             </div>
                         @endforeach
-                        @error('avatar_id')
+                        @error('avatar_choices')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <h5 id="current-avatar-label" style="display: none;">Current Avatar</h5>
+                    <div class="d-flex justify-content-around mb-4 flex-wrap">
+                        @foreach ($avatars as $avatar)
+                            <div id="current-avatar-{{ $avatar->id }}-container" style="display: none;">
+                                <input type="radio" id="current-avatar-{{ $avatar->id }}" name="current_avatar"
+                                    value="{{ $avatar->id }}" />
+                                <label for="current-avatar-{{ $avatar->id }}">
+                                    <img src="{{ $avatar->image_src }}" alt="current avatar" width="75px" height="75px"
+                                        class="rounded-circle">
+                                </label>
+                            </div>
+                        @endforeach
+                        @error('current_avatar')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>
@@ -108,3 +127,23 @@
         </div>
     </div>
 @stop
+
+{{-- @push('custom-scripts')
+    <script>
+        function showSelectedAvatars(id) {
+            const checkBox = document.getElementById(id);
+            const selectedAvatar = document.getElementById('selected-' + id + '-container');
+            const selectedAvatarLabel = document.getElementById('selected-avatars-label');
+
+            if (checkBox.checked) {
+                selectedAvatar.style.display = 'block';
+                selectedAvatarLabel.style.display = 'block';
+            } else {
+                selectedAvatar.style.display = 'none';
+            }
+        }
+
+        // const selectedAvatar = document.getElementById('selected-avatar-1');
+        // selectedAvatar.style.display = 'none';
+    </script>
+@endpush --}}

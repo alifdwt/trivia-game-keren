@@ -23,6 +23,7 @@
     </div>
     @include('includes.scrolltop')
     @include('includes.logoutmodal')
+    @stack('custom-scripts')
     @include('includes.scripts')
 </body>
 

@@ -19,3 +19,20 @@
 
 <!-- Page level custom scripts -->
 <script src="dashboard/js/demo/datatables-demo.js"></script>
+<script>
+    function showSelectedAvatars(id) {
+        const checkBox = document.getElementById(id);
+        const selectedAvatar = document.getElementById('current-' + id + '-container');
+        const selectedAvatarLabel = document.getElementById('current-avatar-label');
+
+        if (checkBox.checked) {
+            selectedAvatar.style.display = 'block';
+            selectedAvatarLabel.style.display = 'block';
+        } else {
+            selectedAvatar.style.display = 'none';
+        }
+    }
+
+    // const selectedAvatar = document.getElementById('selected-avatar-1');
+    // selectedAvatar.style.display = 'none';
+</script>

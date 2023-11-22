@@ -11,6 +11,9 @@ class Avatar extends Model
     protected $fillable = ["image_src", "price"];
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(
+            User::class,
+            "user_avatar"
+        )->withTimestamps();
     }
 }

@@ -40,7 +40,8 @@ class UserViewController extends Controller
                 "unique:" . User::class,
             ],
             "password" => ["confirmed", Rules\Password::defaults()],
-            "avatar_id" => ["required", "numeric"],
+            "avatar" => ["required"],
+            "current_avatar" => ["required", "numeric"],
             "diamonds" => ["required", "numeric"],
             "total_points" => ["required", "numeric"],
         ]);
@@ -54,6 +55,8 @@ class UserViewController extends Controller
             "diamonds" => $request->diamonds,
             "total_points" => $request->total_points,
         ]);
+
+        $user->avatar()->sync($request->avatar);
 
         event(new Registered($user));
 

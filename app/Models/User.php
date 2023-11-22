@@ -23,7 +23,7 @@ class User extends Authenticatable
         "username",
         "diamonds",
         "total_points",
-        "avatar_id",
+        "current_avatar",
         "password",
         "email_verified_at",
         "remember_token",
@@ -48,6 +48,9 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return $this->belongsTo(Avatar::class);
+        return $this->belongsToMany(
+            Avatar::class,
+            "user_avatar"
+        )->withTimestamps();
     }
 }

@@ -3,17 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\CloudinaryStorage;
+use DateTime;
 
 class AvatarViewController extends Controller
 {
     public function index(): View
     {
         $avatars = Avatar::orderBy("id")->get();
-        return view("pages.avatar", compact("avatars"));
+        $users = User::orderBy("id")->get();
+
+        $currentDate = new DateTime();
+        $currentMonth = $currentDate->format("m"); // Ambil bulan saat ini
+        $currentYear = $currentDate->format("Y"); // Ambil tahun saat ini
+
+        // Inisialisasi total keuntungan bulan November dan total keuntungan per tahun
+        $totalKeuntunganBulanIni = 0;
+        $totalKeuntunganTahunIni = 0;
+
+        foreach ($users as $user) {
+            $avatarId = $user->avatar_id;
+            foreach ($avatars as $avatar) {
+                if ($avatar->id == $avatarId) {
+                    $createdAt = new DateTime($avatar->created_at);
+                    $avatarMonth = $createdAt->format("m"); // Ambil bulan pembelian avatar
+                    $avatarYear = $createdAt->format("Y"); // Ambil tahun pembelian avatar
+
+                    if (
+                        $avatarMonth === $currentMonth &&
+                        $avatarYear === $currentYear
+                    ) {
+                        $totalKeuntunganBulanIni += $avatar["price"];
+                    }
+
+                    if ($avatarYear === $currentYear) {
+                        $totalKeuntunganTahunIni += $avatar["price"];
+                    }
+                    break;
+                }
+            }
+        }
+        return view(
+            "pages.avatar",
+            compact(
+                "avatars",
+                "totalKeuntunganBulanIni",
+                "totalKeuntunganTahunIni"
+            )
+        );
     }
 
     public function store(Request $request): RedirectResponse
@@ -49,15 +90,19 @@ class AvatarViewController extends Controller
     {
         $avatar = Avatar::findOrFail($id);
         $this->validate($request, [
-            "image_src" => "required|image|mimes:jpeg,jpg,png|max:2048",
+            "image_src" => "image|mimes:jpeg,jpg,png|max:2048",
             "price" => "required|numeric",
         ]);
 
-        $image = $request->file("image_src");
-        $result = CloudinaryStorage::upload(
-            $image->getRealPath(),
-            $image->getClientOriginalName()
-        );
+        if ($request->hasFile("image_src")) {
+            $image = $request->file("image_src");
+            $result = CloudinaryStorage::upload(
+                $image->getRealPath(),
+                $image->getClientOriginalName()
+            );
+        } else {
+            $result = $avatar->image_src;
+        }
 
         $avatar->update([
             "image_src" => $result,

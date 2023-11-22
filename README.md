@@ -16,26 +16,56 @@
     "data": [
         {
             "id": 1,
-            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950113/Trivia/Avatar/2023-11-14_082152_tampandanberani.jpg",
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700031126/Trivia/Avatar/2023-11-15_065204_tampandanberani.jpg",
             "price": 50000,
-            "created_at": "2023-11-14T08:21:54.000000Z",
-            "updated_at": "2023-11-14T08:21:54.000000Z"
+            "created_at": "2023-11-13T01:57:49.000000Z",
+            "updated_at": "2023-11-13T01:57:49.000000Z"
         },
         {
             "id": 2,
-            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950357/Trivia/Avatar/2023-11-14_082555_2090263599_bd7f79ae17_o.jpg",
-            "price": 75000,
-            "created_at": "2023-11-14T08:25:58.000000Z",
-            "updated_at": "2023-11-14T08:25:58.000000Z"
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700033601/Trivia/Avatar/2023-11-15_073309_2090263599_bd7f79ae17_o.jpg",
+            "price": 25000,
+            "created_at": "2023-11-15T00:33:22.000000Z",
+            "updated_at": "2023-11-15T00:33:22.000000Z"
         },
         {
             "id": 3,
-            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699954205/Trivia/Avatar/2023-11-14_093003_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg",
-            "price": 80000,
-            "created_at": "2023-11-14T09:30:06.000000Z",
-            "updated_at": "2023-11-14T09:30:06.000000Z"
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700126188/Trivia/Avatar/2023-11-16_091621_mrkrabs.jpg",
+            "price": 35000,
+            "created_at": "2023-11-16T02:16:29.000000Z",
+            "updated_at": "2023-11-16T02:16:29.000000Z"
+        },
+        {
+            "id": 4,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700140602/Trivia/Avatar/2023-11-16_131618_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg",
+            "price": 3000,
+            "created_at": "2023-11-16T06:16:43.000000Z",
+            "updated_at": "2023-11-16T06:16:43.000000Z"
         }
     ]
+}
+```
+
+#### Store Avatar
+
+-   URL: `/api/avatar`
+-   Method: POST
+-   Body: form-data
+-   Description: Store avatar
+-   Require token: `No`
+-   Request:
+
+```
+image_src: file,
+price: number
+```
+
+-   Response
+
+```
+{
+    "code": 200,
+    "message": "Avatar created successfully"
 }
 ```
 
@@ -52,10 +82,10 @@
     "code": 200,
     "data": {
         "id": 1,
-        "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950113/Trivia/Avatar/2023-11-14_082152_tampandanberani.jpg",
+        "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700031126/Trivia/Avatar/2023-11-15_065204_tampandanberani.jpg",
         "price": 50000,
-        "created_at": "2023-11-14T08:21:54.000000Z",
-        "updated_at": "2023-11-14T08:21:54.000000Z"
+        "created_at": "2023-11-13T01:57:49.000000Z",
+        "updated_at": "2023-11-13T01:57:49.000000Z"
     }
 }
 ```
@@ -76,35 +106,85 @@
     "data": [
         {
             "id": 1,
-            "avatar_id": 1,
-            "email": "asepsurasep@gmail.com",
-            "username": "asepsurasep",
-            "diamonds": 10,
-            "total_points": 20,
-            "created_at": "2023-11-14T08:28:35.000000Z",
-            "updated_at": "2023-11-14T08:28:35.000000Z"
+            "name": "Alif Putra Dewantara",
+            "email": "aputradewantara@outlook.com",
+            "username": "alifdwt",
+            "diamonds": 0,
+            "total_points": 0,
+            "email_verified_at": "2023-11-22T02:43:38.000000Z",
+            "created_at": "2023-11-22T02:36:59.000000Z",
+            "updated_at": "2023-11-22T02:43:38.000000Z",
+            "current_avatar": 3
         },
         {
             "id": 2,
-            "avatar_id": 2,
-            "email": "onosurono@gmail.com",
-            "username": "onosurono",
-            "diamonds": 15,
-            "total_points": 30,
-            "created_at": "2023-11-14T08:29:17.000000Z",
-            "updated_at": "2023-11-14T08:29:17.000000Z"
+            "name": "Adi Suradi",
+            "email": "adisuradi@gmail.com",
+            "username": "adisuradi",
+            "diamonds": 0,
+            "total_points": 0,
+            "email_verified_at": null,
+            "created_at": "2023-11-22T04:03:04.000000Z",
+            "updated_at": "2023-11-22T04:03:04.000000Z",
+            "current_avatar": 1
         },
         {
             "id": 3,
-            "avatar_id": 1,
-            "email": "icejuice@gmail.com",
-            "username": "icejuice",
+            "name": "Tuti Fruti",
+            "email": "tutifruti@gmail.com",
+            "username": "tutifruti",
             "diamonds": 10,
             "total_points": 30,
-            "created_at": "2023-11-14T08:29:37.000000Z",
-            "updated_at": "2023-11-14T08:29:37.000000Z"
+            "email_verified_at": null,
+            "created_at": "2023-11-22T04:06:16.000000Z",
+            "updated_at": "2023-11-22T04:06:16.000000Z",
+            "current_avatar": 3
         }
     ]
+}
+```
+
+#### Store User
+
+-   URL: `/api/user`
+-   Method: POST
+-   Description: Store user
+-   Require token: `No`
+-   Header: `Accept: application/json`
+-   Request:
+
+```
+{
+    "name": "Tuti Fruti",
+    "email": "tutifruti@gmail.com",
+    "username": "tutifruti",
+    "password": "12345678",
+    "password_confirmation": "12345678",
+    "avatar_choices": ["2", "3"],
+    "current_avatar": 3,
+    "diamonds": 10,
+    "total_points": 30,
+    "admin_code": "ADMIN_CODE"
+}
+```
+
+-   Response
+
+```
+{
+    "code": 200,
+    "message": "User created successfully",
+    "data": {
+        "name": "Tuti Fruti",
+        "email": "tutifruti@gmail.com",
+        "username": "tutifruti",
+        "current_avatar": 3,
+        "diamonds": 10,
+        "total_points": 30,
+        "updated_at": "2023-11-22T04:06:16.000000Z",
+        "created_at": "2023-11-22T04:06:16.000000Z",
+        "id": 3
+    }
 }
 ```
 
@@ -121,13 +201,110 @@
     "code": 200,
     "data": {
         "id": 1,
-        "avatar_id": 1,
-        "email": "asepsurasep@gmail.com",
-        "username": "asepsurasep",
-        "diamonds": 10,
-        "total_points": 20,
-        "created_at": "2023-11-14T08:28:35.000000Z",
-        "updated_at": "2023-11-14T08:28:35.000000Z"
+        "name": "Alif Putra Dewantara",
+        "email": "aputradewantara@outlook.com",
+        "username": "alifdwt",
+        "diamonds": 0,
+        "total_points": 0,
+        "email_verified_at": "2023-11-22T02:43:38.000000Z",
+        "created_at": "2023-11-22T02:36:59.000000Z",
+        "updated_at": "2023-11-22T02:43:38.000000Z",
+        "current_avatar": 3
+    }
+}
+```
+
+### User Avatar
+
+#### Get User Avatars
+
+-   URL: `/api/user-avatar`
+-   Method: GET
+-   Description: Get user avatars
+-   Require token: `No`
+-   Response
+
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "avatar_id": 2,
+            "created_at": "2023-11-22T02:36:59.000000Z",
+            "updated_at": "2023-11-22T02:36:59.000000Z"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "avatar_id": 3,
+            "created_at": "2023-11-22T02:36:59.000000Z",
+            "updated_at": "2023-11-22T02:36:59.000000Z"
+        },
+        {
+            "id": 3,
+            "user_id": 1,
+            "avatar_id": 4,
+            "created_at": "2023-11-22T02:36:59.000000Z",
+            "updated_at": "2023-11-22T02:36:59.000000Z"
+        },
+        {
+            "id": 4,
+            "user_id": 2,
+            "avatar_id": 1,
+            "created_at": "2023-11-22T04:03:04.000000Z",
+            "updated_at": "2023-11-22T04:03:04.000000Z"
+        },
+        {
+            "id": 5,
+            "user_id": 2,
+            "avatar_id": 2,
+            "created_at": "2023-11-22T04:03:04.000000Z",
+            "updated_at": "2023-11-22T04:03:04.000000Z"
+        },
+        {
+            "id": 6,
+            "user_id": 2,
+            "avatar_id": 3,
+            "created_at": "2023-11-22T04:03:04.000000Z",
+            "updated_at": "2023-11-22T04:03:04.000000Z"
+        },
+        {
+            "id": 7,
+            "user_id": 3,
+            "avatar_id": 2,
+            "created_at": "2023-11-22T04:06:16.000000Z",
+            "updated_at": "2023-11-22T04:06:16.000000Z"
+        },
+        {
+            "id": 8,
+            "user_id": 3,
+            "avatar_id": 3,
+            "created_at": "2023-11-22T04:06:16.000000Z",
+            "updated_at": "2023-11-22T04:06:16.000000Z"
+        }
+    ]
+}
+```
+
+#### Get User Avatar by ID
+
+-   URL: `/api/user-avatar/:userAvatarId`
+-   Method: GET
+-   Description: Get user avatar by ID
+-   Require token: `No`
+-   Response
+
+```
+{
+    "code": 200,
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "avatar_id": 2,
+        "created_at": "2023-11-22T02:36:59.000000Z",
+        "updated_at": "2023-11-22T02:36:59.000000Z"
     }
 }
 ```
@@ -177,6 +354,7 @@
             "updated_at": "2023-11-14T07:50:13.000000Z"
         }
     ]
+}
 ```
 
 #### Get Question by ID

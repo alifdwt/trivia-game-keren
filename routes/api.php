@@ -7,6 +7,7 @@ use App\Http\Controllers\api\AvatarController;
 use App\Http\Controllers\api\QuestionController;
 use App\Http\Controllers\api\AnswerController;
 use App\Http\Controllers\api\TriviaUserController;
+use App\Http\Controllers\api\UserAvatarController;
 
 Route::middleware("auth:sanctum")->get("/users", function (Request $request) {
     return $request->user();
@@ -35,3 +36,5 @@ Route::apiResource("answer", AnswerController::class);
 //     "trivia-user",
 //     \App\Http\Controllers\api\TriviaUserController::class
 // );
+// USER AVATAR
+Route::apiResource("user-avatar", UserAvatarController::class);

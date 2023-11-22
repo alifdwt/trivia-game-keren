@@ -3,10 +3,60 @@
 @section('title', 'Avatar')
 @section('content')
     <div>
-        <h1 class="h3 mb-2 text-gray-800">Avatars</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-            For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
-                DataTables documentation</a>.</p>
+        <div>
+            <h1 class="h3 mb-2 text-gray-800">Avatars</h1>
+            {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                For more information about DataTables, please visit the <a target="_blank"
+                    href="https://datatables.net">official
+                    DataTables documentation</a>.</p> --}}
+        </div>
+
+        <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <x-infocard title="Earnings (Monthly)" color="primary" value="{{ $totalKeuntunganBulanIni }} diamonds"
+                icon="fas fa-dollar-sign" />
+
+            <!-- Earnings (Annual) Card Example -->
+            <x-infocard title="Earnings (Annual)" color="success" value="{{ $totalKeuntunganTahunIni }} diamonds"
+                icon="fas fa-dollar-sign" />
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Tasks
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                            50%
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                style="
+                                                    width: 50%;
+                                                "
+                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <x-infocard title="Pending Requests" color="warning" value="18 requests" icon="fas fa-comments" />
+        </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -39,7 +89,7 @@
                                     </td>
                                     <td>{{ $avatar->price }}</td>
                                     <td>
-                                        @foreach ($avatar->users()->get() as $user)
+                                        {{-- @foreach ($avatar->users()->get() as $user)
                                             <div class="card shadow-sm mb-2">
                                                 <div class="card-body">
                                                     Email: {{ $user->email }}
@@ -49,7 +99,9 @@
                                                     Total Points: {{ $user->total_points }}
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endforeach --}}
+                                        <p>Total: {{ $avatar->users()->count() }}</p>
+                                        <p>Earnings: {{ $avatar->users()->count() * $avatar->price }} diamonds</p>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal"
@@ -114,8 +166,8 @@
 
         {{-- Edit Modal --}}
         @foreach ($avatars as $editAvatar)
-            <div class="modal fade" id="avatarEdit{{ $editAvatar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="avatarEdit{{ $editAvatar->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <form action="{{ route('avatar.update', $editAvatar->id) }}" method="POST"
                         enctype="multipart/form-data">

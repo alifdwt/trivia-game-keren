@@ -51,7 +51,8 @@ class RegisteredUserController extends Controller
                 "unique:" . User::class,
             ],
             "password" => ["required", "confirmed", Rules\Password::defaults()],
-            "avatar_id" => ["required", "numeric"],
+            "avatar_choices" => ["required"],
+            "current_avatar" => ["required", "numeric"],
             "admin_code" => ["required", "string"],
         ]);
 
@@ -69,10 +70,12 @@ class RegisteredUserController extends Controller
             "email" => $request->email,
             "username" => $request->username,
             "password" => Hash::make($request->password),
-            "avatar_id" => $request->avatar_id,
+            "current_avatar" => $request->current_avatar,
             // "email_verified_at" => $request->email_verified_at,
             "remember_token" => $token,
         ]);
+
+        $user->avatar()->attach($request->avatar_choices);
 
         Mail::send(
             "emails.emailVerificationEmail",

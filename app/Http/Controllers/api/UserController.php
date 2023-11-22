@@ -46,27 +46,43 @@ class UserController extends Controller
                     "max:255",
                     "unique:" . User::class,
                 ],
-                "password" => ["confirmed", Rules\Password::defaults()],
-                "avatar_id" => ["required", "numeric"],
-                "diamonds" => ["required", "numeric"],
-                "total_points" => ["required", "numeric"],
+                "password" => [
+                    "required",
+                    "confirmed",
+                    Rules\Password::defaults(),
+                ],
+                "avatar_choices" => ["required"],
+                "current_avatar" => ["required", "numeric"],
+                "admin_code" => ["required", "string"],
+                "diamonds" => ["numeric"],
+                "total_points" => ["numeric"],
             ]);
+
+            if ($request->admin_code !== env("ADMIN_CODE")) {
+                return response()->json([
+                    "code" => 403,
+                    "message" => "Unauthorized! Wrong admin code",
+                ]);
+            }
 
             $user = User::create([
                 "name" => $request->name,
                 "email" => $request->email,
                 "username" => $request->username,
                 "password" => Hash::make($request->password),
-                "avatar_id" => $request->avatar_id,
+                "current_avatar" => $request->current_avatar,
                 "diamonds" => $request->diamonds,
                 "total_points" => $request->total_points,
+                // "email_verified_at" => $request->email_verified_at,
+                // "remember_token" => $token,
             ]);
 
-            event(new Registered($user));
+            $user->avatar()->attach($request->avatar_choices);
 
             return response()->json([
                 "code" => 200,
                 "message" => "User created successfully",
+                "data" => $user,
             ]);
         } catch (QueryException $e) {
             return response()->json([

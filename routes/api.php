@@ -8,6 +8,7 @@ use App\Http\Controllers\api\QuestionController;
 use App\Http\Controllers\api\AnswerController;
 use App\Http\Controllers\api\TriviaUserController;
 use App\Http\Controllers\api\UserAvatarController;
+use App\Http\Controllers\api\AvatarPriceController;
 
 Route::middleware("auth:sanctum")->get("/users", function (Request $request) {
     return $request->user();
@@ -38,3 +39,7 @@ Route::apiResource("answer", AnswerController::class);
 // );
 // USER AVATAR
 Route::apiResource("user-avatar", UserAvatarController::class);
+
+// AVATAR PRICE
+Route::get("avatar-free", [AvatarPriceController::class, "getFreeAvatars"]);
+Route::get("avatar-paid", [AvatarPriceController::class, "getPaidAvatars"]);

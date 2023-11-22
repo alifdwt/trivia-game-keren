@@ -3,10 +3,19 @@
 @section('title', 'User')
 @section('content')
     <div>
-        <h1 class="h3 mb-2 text-gray-800">Users</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        <div>
+            <h1 class="h3 mb-2 text-gray-800">Users</h1>
+            {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
             For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
-                DataTables documentation</a>.</p>
+                DataTables documentation</a>.</p> --}}
+        </div>
+
+        <div class="row">
+            <x-infocard title="Total Users" color="primary" value="{{ $users->count() }}" icon="fas fa-users" />
+            <x-infocard title="Total Diamonds" color="success" value="{{ $users->sum('diamonds') }}" icon="fas fa-coins" />
+            <x-infocard title="Total Points" color="warning" value="{{ $users->sum('total_points') }}"
+                icon="fas fa-trophy" />
+        </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -37,9 +46,16 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <div class="d-flex justify-content-center">
-                                            <img src="{{ url($user->avatar()->get()[0]->image_src) }}" alt="avatar"
-                                                width="100px">
+                                        <div class="d-flex justify-content-center" style="gap: 10px">
+                                            @foreach ($user->avatar as $avatar)
+                                                @if ($user->currentAvatar()->get()[0]->id == $avatar->id)
+                                                    <img src="{{ $avatar->image_src }}" alt="current avatar" width="75px"
+                                                        class="rounded-circle" style="border: 5px solid #6f43c1">
+                                                @else
+                                                    <img src="{{ $avatar->image_src }}" alt="avatar" width="75px"
+                                                        class="rounded-circle">
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </td>
                                     <td>{{ $user->name }}</td>
@@ -129,8 +145,8 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword"
-                                        placeholder="Password" name="password">
+                                    <input type="password" class="form-control form-control-user"
+                                        id="exampleInputPassword" placeholder="Password" name="password">
                                     @error('password')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -138,8 +154,9 @@
                                     @enderror
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
-                                        placeholder="Repeat Password" name="password_confirmation">
+                                    <input type="password" class="form-control form-control-user"
+                                        id="exampleRepeatPassword" placeholder="Repeat Password"
+                                        name="password_confirmation">
                                     @error('password_confirmation')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -147,18 +164,37 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-around mb-4 flex-wrap">
+                            <h5>Avatars</h5>
+                            <div class="d-flex justify-content-around mb-4 flex-wrap" style="width: 85%">
                                 @foreach ($avatars as $avatar)
                                     <div>
-                                        <input type="radio" id="avatar-{{ $avatar->id }}" name="avatar_id"
-                                            value="{{ $avatar->id }}" />
+                                        <input type="checkbox" id="avatar-{{ $avatar->id }}" name="avatar_choices[]"
+                                            value="{{ $avatar->id }}" onclick="showSelectedAvatars(this.id)" />
                                         <label for="avatar-{{ $avatar->id }}">
                                             <img src="{{ $avatar->image_src }}" alt="avatar" width="75px"
                                                 height="75px" class="rounded-circle">
                                         </label>
                                     </div>
                                 @endforeach
-                                @error('avatar_id')
+                                @error('avatar_choices')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <h5 id="current-avatar-label" style="display: none;">Current Avatar</h5>
+                            <div class="d-flex justify-content-around mb-4 flex-wrap" style="width: 85%">
+                                @foreach ($avatars as $avatar)
+                                    <div id="current-avatar-{{ $avatar->id }}-container" style="display: none;">
+                                        <input type="radio" id="current-avatar-{{ $avatar->id }}"
+                                            name="current_avatar" value="{{ $avatar->id }}" />
+                                        <label for="current-avatar-{{ $avatar->id }}">
+                                            <img src="{{ $avatar->image_src }}" alt="current avatar" width="75px"
+                                                height="75px" class="rounded-circle">
+                                        </label>
+                                    </div>
+                                @endforeach
+                                @error('current_avatar')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>

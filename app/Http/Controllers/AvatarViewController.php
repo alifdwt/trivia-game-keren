@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Avatar;
 use App\Models\User;
+use App\Models\UserAvatar;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +17,7 @@ class AvatarViewController extends Controller
     {
         $avatars = Avatar::orderBy("id")->get();
         $users = User::orderBy("id")->get();
+        $userAvatars = UserAvatar::orderBy("id")->get();
 
         $currentDate = new DateTime();
         $currentMonth = $currentDate->format("m"); // Ambil bulan saat ini
@@ -25,23 +27,22 @@ class AvatarViewController extends Controller
         $totalKeuntunganBulanIni = 0;
         $totalKeuntunganTahunIni = 0;
 
-        foreach ($users as $user) {
-            $avatarId = $user->avatar_id;
+        foreach ($userAvatars as $userAvatar) {
+            $avatarId = $userAvatar->avatar_id;
             foreach ($avatars as $avatar) {
-                if ($avatar->id == $avatarId) {
-                    $createdAt = new DateTime($avatar->created_at);
-                    $avatarMonth = $createdAt->format("m"); // Ambil bulan pembelian avatar
-                    $avatarYear = $createdAt->format("Y"); // Ambil tahun pembelian avatar
+                if ($avatar->id === $avatarId) {
+                    $createdAt = new DateTime($userAvatar->created_at);
+                    $avatarMonth = $createdAt->format("m");
+                    $avatarYear = $createdAt->format("Y");
 
                     if (
                         $avatarMonth === $currentMonth &&
                         $avatarYear === $currentYear
                     ) {
-                        $totalKeuntunganBulanIni += $avatar["price"];
+                        $totalKeuntunganBulanIni += $avatar->price;
                     }
-
                     if ($avatarYear === $currentYear) {
-                        $totalKeuntunganTahunIni += $avatar["price"];
+                        $totalKeuntunganTahunIni += $avatar->price;
                     }
                     break;
                 }

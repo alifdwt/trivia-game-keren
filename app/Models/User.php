@@ -53,4 +53,8 @@ class User extends Authenticatable
             "user_avatar"
         )->withTimestamps();
     }
+    public function currentAvatar()
+    {
+        return $this->belongsTo(Avatar::class, "current_avatar");
+    }
 }

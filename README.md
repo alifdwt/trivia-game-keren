@@ -90,6 +90,94 @@ price: number
 }
 ```
 
+#### Get Free Avatars
+
+-   URL: `/api/avatar-free`
+-   Method: GET
+-   Description: Get free avatars
+-   Require token: `No`
+-   Response
+
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 7,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530400/Trivia/Avatar/2023-11-21_083318_plankton.png",
+            "price": 0,
+            "created_at": "2023-11-21T01:33:21.000000Z",
+            "updated_at": "2023-11-21T01:33:21.000000Z"
+        },
+        {
+            "id": 8,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530477/Trivia/Avatar/2023-11-21_083435_sandy.jpg",
+            "price": 0,
+            "created_at": "2023-11-21T01:34:38.000000Z",
+            "updated_at": "2023-11-21T01:34:38.000000Z"
+        },
+        {
+            "id": 9,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530681/Trivia/Avatar/2023-11-21_083759_mrspuff.jpg",
+            "price": 0,
+            "created_at": "2023-11-21T01:38:02.000000Z",
+            "updated_at": "2023-11-21T01:38:02.000000Z"
+        },
+        {
+            "id": 10,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530883/Trivia/Avatar/2023-11-21_084121_Alaskan_Bull_Worm.jpg",
+            "price": 0,
+            "created_at": "2023-11-21T01:41:24.000000Z",
+            "updated_at": "2023-11-21T01:41:24.000000Z"
+        }
+    ]
+}
+```
+
+#### Get Paid Avatars
+
+-   URL: `/api/avatar-paid`
+-   Method: GET
+-   Description: Get paid avatars
+-   Require token: `No`
+-   Response
+
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700031126/Trivia/Avatar/2023-11-15_065204_tampandanberani.jpg",
+            "price": 50,
+            "created_at": "2023-11-14T01:21:54.000000Z",
+            "updated_at": "2023-11-21T01:24:15.000000Z"
+        },
+        {
+            "id": 2,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699950357/Trivia/Avatar/2023-11-14_082555_2090263599_bd7f79ae17_o.jpg",
+            "price": 75,
+            "created_at": "2023-11-14T01:25:58.000000Z",
+            "updated_at": "2023-11-21T01:24:24.000000Z"
+        },
+        {
+            "id": 3,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699954205/Trivia/Avatar/2023-11-14_093003_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg",
+            "price": 80,
+            "created_at": "2023-11-14T02:30:06.000000Z",
+            "updated_at": "2023-11-21T01:24:34.000000Z"
+        },
+        {
+            "id": 4,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700028244/Trivia/Avatar/2023-11-15_060402_mrkrabs.jpg",
+            "price": 60,
+            "created_at": "2023-11-14T23:04:05.000000Z",
+            "updated_at": "2023-11-21T01:24:42.000000Z"
+        }
+    ]
+}
+```
+
 ### User
 
 #### Get Users

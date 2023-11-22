@@ -11,7 +11,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table("users", function (Blueprint $table) {
-            $table->unsignedBigInteger("current_avatar")->after("id");
+            $table
+                ->unsignedBigInteger("current_avatar")
+                ->after("id")
+                ->nullable();
 
             $table
                 ->foreign("current_avatar")

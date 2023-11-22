@@ -201,7 +201,8 @@
                         <span class="mr-2 d-none d-lg-block text-red-800 small">Unverified</span>
                     @endif
                 </div>
-                <img class="img-profile rounded-circle" src="{{ Auth::user()->avatar()->get()[0]->image_src }}" />
+                <img class="img-profile rounded-circle"
+                    src="{{ Auth::user()->currentAvatar()->get()[0]->image_src }}" />
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

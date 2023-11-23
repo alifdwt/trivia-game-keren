@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -47,37 +49,28 @@ class UserController extends Controller
                     "unique:" . User::class,
                 ],
                 "password" => [
-                    "required",
+                    "sometimes",
                     "confirmed",
                     Rules\Password::defaults(),
                 ],
-                "avatar_choices" => ["required"],
+                "avatar_choices" => ["sometimes", "array"],
                 "current_avatar" => ["required", "numeric"],
-                "admin_code" => ["required", "string"],
                 "diamonds" => ["numeric"],
                 "total_points" => ["numeric"],
             ]);
-
-            if ($request->admin_code !== env("ADMIN_CODE")) {
-                return response()->json([
-                    "code" => 403,
-                    "message" => "Unauthorized! Wrong admin code",
-                ]);
-            }
 
             $user = User::create([
                 "name" => $request->name,
                 "email" => $request->email,
                 "username" => $request->username,
-                "password" => Hash::make($request->password),
                 "current_avatar" => $request->current_avatar,
                 "diamonds" => $request->diamonds,
                 "total_points" => $request->total_points,
-                // "email_verified_at" => $request->email_verified_at,
-                // "remember_token" => $token,
             ]);
 
-            $user->avatar()->attach($request->avatar_choices);
+            if ($request->has("avatar_choices")) {
+                $user->avatars()->attach($request->avatar_choices);
+            }
 
             return response()->json([
                 "code" => 200,
@@ -113,43 +106,46 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
 
-            $rules = [
-                "name" => ["required", "string", "max:255"],
+            $validatedData = $request->validate([
+                "name" => ["sometimes", "required", "string", "max:255"],
                 "email" => [
+                    "sometimes",
                     "required",
                     "string",
                     "lowercase",
                     "email",
                     "max:255",
-                    Rule::unique(User::class)->ignore($id, "id"),
+                    Rule::unique("users")->ignore($user->id),
                 ],
-                "avatar_id" => ["required", "numeric"],
-                "diamonds" => ["required", "numeric"],
-                "total_points" => ["required", "numeric"],
-            ];
+                "username" => [
+                    "sometimes",
+                    "required",
+                    "string",
+                    "max:255",
+                    Rule::unique("users")->ignore($user->id),
+                ],
+                "avatar_choices" => ["sometimes", "array"],
+                "current_avatar" => ["sometimes", "required", "numeric"],
+                "diamonds" => ["sometimes", "numeric"],
+                "total_points" => ["sometimes", "numeric"],
+            ]);
 
-            if ($request->password === "") {
-                // Jika password tidak diisi dalam request, jangan ubah password yang ada di database
-                $request->merge(["password" => $user->password]);
-            } elseif ($request->has("password")) {
-                // Jika password diisi dalam request, gunakan password yang diberikan
-                $request->merge(["password" => $request->password]);
+            // Update only validated fields
+            $user->fill($validatedData);
+            $user->save();
+
+            if ($request->has("avatar_choices")) {
+                $user->avatar()->sync($request->avatar_choices);
             }
-            // Cek apakah bidang password tidak kosong sebelum menambahkan aturan validasi
-            if ($request->has("password")) {
-                $rules["password"] = [
-                    "nullable",
-                    "confirmed",
-                    Rules\Password::defaults(),
-                ];
-            }
 
-            $this->validate($request, $rules);
-
-            $user->update($request->all());
             return response()->json([
                 "code" => 200,
                 "message" => "User updated successfully",
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                "code" => 422,
+                "message" => $e->errors(),
             ]);
         } catch (\Exception $e) {
             return response()->json([

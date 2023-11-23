@@ -246,13 +246,12 @@ price: number
     "name": "Tuti Fruti",
     "email": "tutifruti@gmail.com",
     "username": "tutifruti",
-    "password": "12345678",
-    "password_confirmation": "12345678",
-    "avatar_choices": ["2", "3"],
+    "password": "12345678" (sometimes),
+    "password_confirmation": "12345678" (sometimes),
+    "avatar_choices": ["2", "3"] (sometimes),
     "current_avatar": 3,
     "diamonds": 10,
-    "total_points": 30,
-    "admin_code": "ADMIN_CODE"
+    "total_points": 30
 }
 ```
 
@@ -299,6 +298,38 @@ price: number
         "updated_at": "2023-11-22T02:43:38.000000Z",
         "current_avatar": 3
     }
+}
+```
+
+#### Update User
+
+-   URL: `/api/user/:userId`
+-   Method: PUT
+-   Description: Update user
+-   Require token: `No`
+-   Header: `Accept: application/json`
+-   Request:
+
+```
+{
+    "name": "Tuti Fruti" (sometimes),
+    "email": "tutifruti@gmail.com" (sometimes),
+    "username": "tutifruti" (sometimes),
+    "password": "12345678" (sometimes),
+    "password_confirmation": "12345678" (sometimes),
+    "avatar_choices": ["2", "3"] (sometimes),
+    "current_avatar": 3 (sometimes),
+    "diamonds": 10 (sometimes),
+    "total_points": 30 (sometimes)
+}
+```
+
+-   Response
+
+```
+{
+    "code": 200,
+    "message": "User updated successfully",
 }
 ```
 

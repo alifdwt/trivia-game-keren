@@ -9,4 +9,14 @@ class UserAvatar extends Model
 {
     protected $table = "user_avatar";
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function avatar()
+    {
+        return $this->belongsTo(Avatar::class);
+    }
 }

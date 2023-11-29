@@ -349,59 +349,47 @@ price: number
     "data": [
         {
             "id": 1,
-            "user_id": 1,
-            "avatar_id": 2,
-            "created_at": "2023-11-22T02:36:59.000000Z",
-            "updated_at": "2023-11-22T02:36:59.000000Z"
+            "user_id": 3,
+            "avatar_id": 3,
+            "created_at": "2023-11-22T06:17:09.000000Z",
+            "updated_at": "2023-11-22T06:17:09.000000Z",
+            "avatar": {
+                "id": 3,
+                "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699954205/Trivia/Avatar/2023-11-14_093003_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg"
+            }
         },
         {
             "id": 2,
-            "user_id": 1,
-            "avatar_id": 3,
-            "created_at": "2023-11-22T02:36:59.000000Z",
-            "updated_at": "2023-11-22T02:36:59.000000Z"
+            "user_id": 3,
+            "avatar_id": 4,
+            "created_at": "2023-11-22T06:17:09.000000Z",
+            "updated_at": "2023-11-22T06:17:09.000000Z",
+            "avatar": {
+                "id": 4,
+                "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700028244/Trivia/Avatar/2023-11-15_060402_mrkrabs.jpg"
+            }
         },
         {
             "id": 3,
-            "user_id": 1,
-            "avatar_id": 4,
-            "created_at": "2023-11-22T02:36:59.000000Z",
-            "updated_at": "2023-11-22T02:36:59.000000Z"
+            "user_id": 3,
+            "avatar_id": 10,
+            "created_at": "2023-11-22T06:17:09.000000Z",
+            "updated_at": "2023-11-22T06:17:09.000000Z",
+            "avatar": {
+                "id": 10,
+                "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530883/Trivia/Avatar/2023-11-21_084121_Alaskan_Bull_Worm.jpg"
+            }
         },
         {
             "id": 4,
-            "user_id": 2,
-            "avatar_id": 1,
-            "created_at": "2023-11-22T04:03:04.000000Z",
-            "updated_at": "2023-11-22T04:03:04.000000Z"
-        },
-        {
-            "id": 5,
-            "user_id": 2,
-            "avatar_id": 2,
-            "created_at": "2023-11-22T04:03:04.000000Z",
-            "updated_at": "2023-11-22T04:03:04.000000Z"
-        },
-        {
-            "id": 6,
-            "user_id": 2,
-            "avatar_id": 3,
-            "created_at": "2023-11-22T04:03:04.000000Z",
-            "updated_at": "2023-11-22T04:03:04.000000Z"
-        },
-        {
-            "id": 7,
-            "user_id": 3,
-            "avatar_id": 2,
-            "created_at": "2023-11-22T04:06:16.000000Z",
-            "updated_at": "2023-11-22T04:06:16.000000Z"
-        },
-        {
-            "id": 8,
-            "user_id": 3,
-            "avatar_id": 3,
-            "created_at": "2023-11-22T04:06:16.000000Z",
-            "updated_at": "2023-11-22T04:06:16.000000Z"
+            "user_id": 10,
+            "avatar_id": 8,
+            "created_at": "2023-11-23T01:35:02.000000Z",
+            "updated_at": "2023-11-23T01:35:02.000000Z",
+            "avatar": {
+                "id": 8,
+                "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1700530477/Trivia/Avatar/2023-11-21_083435_sandy.jpg"
+            }
         }
     ]
 }
@@ -420,10 +408,14 @@ price: number
     "code": 200,
     "data": {
         "id": 1,
-        "user_id": 1,
-        "avatar_id": 2,
-        "created_at": "2023-11-22T02:36:59.000000Z",
-        "updated_at": "2023-11-22T02:36:59.000000Z"
+        "user_id": 3,
+        "avatar_id": 3,
+        "created_at": "2023-11-22T06:17:09.000000Z",
+        "updated_at": "2023-11-22T06:17:09.000000Z",
+        "avatar": {
+            "id": 3,
+            "image_src": "https://res.cloudinary.com/dxirtmo5t/image/upload/v1699954205/Trivia/Avatar/2023-11-14_093003_30244297cf3ee8fa9ee6ad63e3cdae3c.jpg"
+        }
     }
 }
 ```

@@ -14,7 +14,7 @@ class UserAvatarController extends Controller
     public function index()
     {
         try {
-            $userAvatars = UserAvatar::all();
+            $userAvatars = UserAvatar::with("avatar:id,image_src")->get();
             return response()->json([
                 "code" => 200,
                 "data" => $userAvatars,
@@ -41,7 +41,9 @@ class UserAvatarController extends Controller
     public function show(string $id)
     {
         try {
-            $userAvatar = UserAvatar::find($id);
+            $userAvatar = UserAvatar::with("avatar:id,image_src")->findOrFail(
+                $id
+            );
             return response()->json([
                 "code" => 200,
                 "data" => $userAvatar,
@@ -59,7 +61,18 @@ class UserAvatarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            UserAvatar::findOrFail($id)->update($request->all());
+            return response()->json([
+                "code" => 200,
+                "message" => "User avatar updated successfully",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "code" => 500,
+                "message" => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

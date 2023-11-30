@@ -193,39 +193,39 @@ price: number
     "code": 200,
     "data": [
         {
-            "id": 1,
+            "id": 3,
             "name": "Alif Putra Dewantara",
             "email": "aputradewantara@outlook.com",
             "username": "alifdwt",
             "diamonds": 0,
             "total_points": 0,
-            "email_verified_at": "2023-11-22T02:43:38.000000Z",
-            "created_at": "2023-11-22T02:36:59.000000Z",
-            "updated_at": "2023-11-22T02:43:38.000000Z",
-            "current_avatar": 3
+            "email_verified_at": "2023-11-22T06:35:57.000000Z",
+            "created_at": "2023-11-22T06:17:09.000000Z",
+            "updated_at": "2023-11-22T06:35:57.000000Z",
+            "current_avatar": 10
         },
         {
-            "id": 2,
-            "name": "Adi Suradi",
-            "email": "adisuradi@gmail.com",
-            "username": "adisuradi",
+            "id": 11,
+            "name": "Pyxel",
+            "email": "semuanyagratis.oo@gmail.com",
+            "username": "Testing123",
             "diamonds": 0,
             "total_points": 0,
             "email_verified_at": null,
-            "created_at": "2023-11-22T04:03:04.000000Z",
-            "updated_at": "2023-11-22T04:03:04.000000Z",
-            "current_avatar": 1
+            "created_at": "2023-11-23T01:45:30.000000Z",
+            "updated_at": "2023-11-23T01:45:30.000000Z",
+            "current_avatar": 9
         },
         {
-            "id": 3,
+            "id": 12,
             "name": "Tuti Fruti",
             "email": "tutifruti@gmail.com",
             "username": "tutifruti",
-            "diamonds": 10,
-            "total_points": 30,
+            "diamonds": 30,
+            "total_points": 50,
             "email_verified_at": null,
-            "created_at": "2023-11-22T04:06:16.000000Z",
-            "updated_at": "2023-11-22T04:06:16.000000Z",
+            "created_at": "2023-11-23T02:03:56.000000Z",
+            "updated_at": "2023-11-23T02:04:52.000000Z",
             "current_avatar": 3
         }
     ]
@@ -287,16 +287,16 @@ price: number
 {
     "code": 200,
     "data": {
-        "id": 1,
+        "id": 3,
         "name": "Alif Putra Dewantara",
         "email": "aputradewantara@outlook.com",
         "username": "alifdwt",
         "diamonds": 0,
         "total_points": 0,
-        "email_verified_at": "2023-11-22T02:43:38.000000Z",
-        "created_at": "2023-11-22T02:36:59.000000Z",
-        "updated_at": "2023-11-22T02:43:38.000000Z",
-        "current_avatar": 3
+        "email_verified_at": "2023-11-22T06:35:57.000000Z",
+        "created_at": "2023-11-22T06:17:09.000000Z",
+        "updated_at": "2023-11-22T06:35:57.000000Z",
+        "current_avatar": 10
     }
 }
 ```
@@ -489,5 +489,83 @@ price: number
         "created_at": "2023-11-14T07:40:19.000000Z",
         "updated_at": "2023-11-14T07:40:19.000000Z"
     }
+}
+```
+
+### Login/Logout
+
+#### Login
+
+-   URL: `/api/login`
+-   Method: POST
+-   Description: Login
+-   Require token: `No`
+-   Request:
+
+```
+{
+    "email": "aputradewantara@outlook.com",
+    "password": 12345678
+}
+```
+
+-   Response
+
+```
+{
+    "success": true,
+    "user": {
+        "id": 3,
+        "name": "Alif Putra Dewantara",
+        "email": "aputradewantara@outlook.com",
+        "username": "alifdwt",
+        "diamonds": 0,
+        "total_points": 0,
+        "email_verified_at": "2023-11-22T06:35:57.000000Z",
+        "created_at": "2023-11-22T06:17:09.000000Z",
+        "updated_at": "2023-11-22T06:35:57.000000Z",
+        "current_avatar": 10
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAxMzI1NjUxLCJleHAiOjE3MDEzMjkyNTEsIm5iZiI6MTcwMTMyNTY1MSwianRpIjoiWmMwMlc2WXZrdlpucWV2cCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._apMcrhZnXlF2I-sWZII0Npuz9T8WFH2el3S-DSkmx0"
+}
+```
+
+#### Check Login
+
+-   URL: `/api/check`
+-   Method: GET
+-   Description: Check Login
+-   Require token: `Yes`
+-   Header: `Accept: application/json`, `Content-Type: application/json`, `Authorization: Bearer {token}`
+-   Response
+
+```
+{
+    "id": 3,
+    "name": "Alif Putra Dewantara",
+    "email": "aputradewantara@outlook.com",
+    "username": "alifdwt",
+    "diamonds": 0,
+    "total_points": 0,
+    "email_verified_at": "2023-11-22T06:35:57.000000Z",
+    "created_at": "2023-11-22T06:17:09.000000Z",
+    "updated_at": "2023-11-22T06:35:57.000000Z",
+    "current_avatar": 10
+}
+```
+
+#### Logout
+
+-   URL: `/api/logout`
+-   Method: POST
+-   Description: Logout
+-   Require token: `Yes`
+-   Header: `Accept: application/json`, `Content-Type: application/json`, `Authorization: Bearer {token}`
+-   Response
+
+```
+{
+    "success": true,
+    "message": "Successfully logged out"
 }
 ```

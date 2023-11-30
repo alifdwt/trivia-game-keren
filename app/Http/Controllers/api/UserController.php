@@ -69,7 +69,7 @@ class UserController extends Controller
             ]);
 
             if ($request->has("avatar_choices")) {
-                $user->avatars()->attach($request->avatar_choices);
+                $user->avatar()->attach($request->avatar_choices);
             }
 
             return response()->json([
